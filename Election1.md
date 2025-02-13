@@ -35,7 +35,7 @@ Nmap done: 1 IP address (1 host up) scanned in 7.09 seconds
 
 **Robots.txt**
 
-
+![](attachments/Pasted%20image%2020250213204426.png)
 
 **Election Page**
 
