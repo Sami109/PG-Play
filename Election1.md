@@ -208,10 +208,56 @@ I attempted to access the system.log file to discover further information:
 
 ![](attachments/Pasted%20image%2020250213205731.png)
 
+I've then attempted to login with the above credentials on the machine using SSH.
+
+```
+┌──(venv)─(kali㉿kali)-[~/Desktop]
+└─$ ssh love@192.168.233.211     
+The authenticity of host '192.168.233.211 (192.168.233.211)' can't be established.
+ED25519 key fingerprint is SHA256:z1Xg/pSBrK8rLIMLyeb0L7CS1YL4g7BgCK95moiAYhQ.
+This host key is known by the following other names/addresses:
+    ~/.ssh/known_hosts:1: [hashed name]
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.233.211' (ED25519) to the list of known hosts.
+love@192.168.233.211's password: 
+
+Welcome to Ubuntu 18.04.4 LTS (GNU/Linux 5.4.0-120-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+
+ * Canonical Livepatch is available for installation.
+   - Reduce system reboots and improve kernel security. Activate at:
+     https://ubuntu.com/livepatch
+
+471 packages can be updated.
+358 updates are security updates.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2023.
+Last login: Thu Apr  9 23:19:28 2020 from 192.168.1.5
+love@election:~$ id
+uid=1000(love) gid=1000(love) groups=1000(love),4(adm),24(cdrom),30(dip),33(www-data),46(plugdev),116(lpadmin),126(sambashare)
+love@election:~$ whoami
+love
+love@election:~$ pwd
+/home/love
+love@election:~$ 
+
+```
+
 Moving forward I started looking more into phpMyAdmin
 
 ![](attachments/Pasted%20image%2020250213205558.png)
 
-I was able to login using the default credentials that were found on the tool "Creds Search". However, I have used the password "toor"
+I was able to login using the default credentials that were found on the tool "Creds Search". However, I have used the password "toor" instead and I was able to login. 
 
 ![](attachments/Pasted%20image%2020250213205822.png)
+
+![](attachments/Pasted%20image%2020250213205850.png)
+
+After digging around into the custom "election" database, I've managed to find the following information which is a password for the user Love: 
+
+![](attachments/Pasted%20image%2020250213210256.png)
+
