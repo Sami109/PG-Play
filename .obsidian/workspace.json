@@ -165,11 +165,16 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "9834f82e7082d25f",
   "lastOpenFiles": [
+    "attachments/Pasted image 20250213195828.png",
+    "attachments/Pasted image 20250213195736.png",
+    "attachments",
+    "Pasted image 20250213195716.png",
     "Readme.md",
     "Election1.md",
     "Untitled"
