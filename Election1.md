@@ -33,10 +33,22 @@ Nmap done: 1 IP address (1 host up) scanned in 7.09 seconds
 
 ```
 
+Analysing web back-end infrastructures and technologies
+
+![](attachments/Pasted%20image%2020250213205249.png)
+
 **Robots.txt**
 
-![](attachments/Pasted%20image%2020250213204426.png)
+![](attachments/Pasted%20image%2020250213205015.png)
 
 **Election Page**
 
+![](attachments/Pasted%20image%2020250213205026.png)
+
+
+![](attachments/Pasted%20image%2020250213205052.png)
+
+Noted as a possible username that could be valid "admin1".
+
+Starting web directory brute-forcing/busting
 
