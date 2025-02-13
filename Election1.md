@@ -335,7 +335,7 @@ love@election:/tmp$ ls -la linpeas.sh
 love@election:/tmp$ 
 ```
 
-After launching the linpeas script, the only thing that stood out was a "crontabs" file.
+After launching the linpeas script, the only thing that stood out was a "crontabs".
 
 ```
 ╔══════════╣ Interesting GROUP writable files (not in Home) (max 200)
@@ -348,4 +348,18 @@ After launching the linpeas script, the only thing that stood out was a "crontab
 ...
 
 ```
+
+I was not able to list the directory's content. 
+
+```
+love@election:/tmp$ cd /var/spool/cron/crontabs
+love@election:/var/spool/cron/crontabs$ ls
+ls: cannot open directory '.': Permission denied
+love@election:/var/spool/cron/crontabs$ ls -la
+ls: cannot open directory '.': Permission denied
+love@election:/var/spool/cron/crontabs$ 
+
+```
+
+Moving forward from here, decided to go with more of a manual way instead.
 
