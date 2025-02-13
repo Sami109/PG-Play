@@ -257,15 +257,15 @@ I was able to login using the default credentials that were found on the tool "C
 
 ![](attachments/Pasted%20image%2020250213205850.png)
 
-After digging around into the custom "election" database, I've managed to find the following information which is a password for the user Love: 
+After digging around into the custom "election" database, I've managed to find the following information which is an encrypted password for the user Love: 
 
 ![](attachments/Pasted%20image%2020250213210256.png)
 
-I've also managed to find the root user's credentials within the built-in MySQL DB.
+I've also managed to find the root user's encrypted credentials within the built-in MySQL DB.
 
 ![](attachments/Pasted%20image%2020250213210807.png)
 
-Now, in order to escalate our privileges from Love to gain full access into root, I've decided to proceed with launching "Linpeas" script.
+Now, in order to escalate our privileges from Love to gain full access into root, I've decided to proceed with launching "linpeas" script.
 
 ```
 ┌──(kali㉿kali)-[~/Desktop]
@@ -333,5 +333,19 @@ love@election:/tmp$ chmod +x linpeas.sh
 love@election:/tmp$ ls -la linpeas.sh 
 -rwxrwxr-x 1 love love 830426 Jan 13 17:01 linpeas.sh
 love@election:/tmp$ 
+```
+
+After launching the linpeas script, the only thing that stood out was a "crontabs" file.
+
+```
+╔══════════╣ Interesting GROUP writable files (not in Home) (max 200)
+╚ https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#writable-files                        
+  Group love:
+
+
+...
+/var/spool/cron/crontabs
+...
+
 ```
 
