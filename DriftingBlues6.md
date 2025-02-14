@@ -1054,3 +1054,46 @@ listening on [any] 4444 ...
 
 Now after the reverse shell payload has been uploaded, I went on to find where it is actually located on the web server
 
+After re-reviewing the output results from both Feroxbuster and Gobuster
+
+![](attachments/Pasted%20image%2020250214221123.png)
+
+And I gained a shell on the target system eventually 
+
+![](attachments/Pasted%20image%2020250214221147.png)
+
+```
+$ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+bin:x:2:2:bin:/bin:/bin/sh
+sys:x:3:3:sys:/dev:/bin/sh
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/bin/sh
+man:x:6:12:man:/var/cache/man:/bin/sh
+lp:x:7:7:lp:/var/spool/lpd:/bin/sh
+mail:x:8:8:mail:/var/mail:/bin/sh
+news:x:9:9:news:/var/spool/news:/bin/sh
+uucp:x:10:10:uucp:/var/spool/uucp:/bin/sh
+proxy:x:13:13:proxy:/bin:/bin/sh
+www-data:x:33:33:www-data:/var/www:/bin/sh
+backup:x:34:34:backup:/var/backups:/bin/sh
+list:x:38:38:Mailing List Manager:/var/list:/bin/sh
+irc:x:39:39:ircd:/var/run/ircd:/bin/sh
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/bin/sh
+nobody:x:65534:65534:nobody:/nonexistent:/bin/sh
+libuuid:x:100:101::/var/lib/libuuid:/bin/sh
+Debian-exim:x:101:103::/var/spool/exim4:/bin/false
+mysql:x:102:105:MySQL Server,,,:/nonexistent:/bin/false
+$ ss -ntlup
+Netid  State      Recv-Q Send-Q     Local Address:Port       Peer Address:Port 
+tcp    LISTEN     0      50             127.0.0.1:3306                  *:*     
+tcp    LISTEN     0      128                   :::80                   :::*     
+tcp    LISTEN     0      20                   ::1:25                   :::*     
+tcp    LISTEN     0      20             127.0.0.1:25                    *:*     
+$ 
+
+```
+
+I noticed that there is a MySQL database running internally on port 3306 and a MySQL user as well on the /etc/passwd 
+
