@@ -873,4 +873,11 @@ I was then able to login successfully using the obtain credentials previously
 
 ![](attachments/Pasted%20image%2020250214213322.png)
 
-Having this 
+I then discovered that the actual version of the textpattern CMS is 4.8.3
+
+![](attachments/Pasted%20image%2020250214213858.png)
+
+After searching for another exploit I managed to find one on GitHub written in Python
+
+![](attachments/Pasted%20image%2020250214213939.png)
+
