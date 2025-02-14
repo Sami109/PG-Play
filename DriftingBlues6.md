@@ -1031,7 +1031,7 @@ After deciding that it is too much of a hassle to fix those broken scripts, I've
 
 ![](attachments/Pasted%20image%2020250214220648.png)
 
-![](attachments/Pasted%20image%2020250214220342.png)
+![](attachments/Pasted%20image%2020250214222211.png)
 
 ```
 ┌──(kali㉿kali)-[~/Downloads]
@@ -1060,7 +1060,7 @@ After re-reviewing the output results from both Feroxbuster and Gobuster
 
 And I gained a shell on the target system eventually 
 
-![](attachments/Pasted%20image%2020250214221147.png)
+![](attachments/Pasted%20image%2020250214222259.png)
 
 ```
 $ cat /etc/passwd
@@ -1142,4 +1142,12 @@ $ chmod +x linpeas.sh
 $ ./linpeas.sh
 
 ```
+
+![](attachments/Pasted%20image%2020250214222551.png)
+
+After looking into the operating system's version, I managed to find a relevant exploit
+
+![](attachments/Pasted%20image%2020250214222519.png)
+
+
 
