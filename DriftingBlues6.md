@@ -871,7 +871,7 @@ Proceeding forward, I have decided to try loging to the textpattern CMS again
 
 I was then able to login successfully using the obtain credentials previously 
 
-![](attachments/Pasted%20image%2020250214213322.png)
+![](attachments/Pasted%20image%2020250214220611.png)
 
 I then discovered that the actual version of the textpattern CMS is 4.8.3
 
@@ -1029,7 +1029,7 @@ AttributeError: 'NoneType' object has no attribute 'replace'
 
 After deciding that it is too much of a hassle to fix those broken scripts, I've went ahead and attempted to upload the file manually from the CMS page directly 
 
-![](attachments/Pasted%20image%2020250214215833.png)
+![](attachments/Pasted%20image%2020250214220648.png)
 
 ![](attachments/Pasted%20image%2020250214220342.png)
 
@@ -1051,4 +1051,6 @@ listening on [any] 4444 ...
 ```
 
 ![](attachments/Pasted%20image%2020250214220428.png)
+
+Now after the reverse shell payload has been uploaded, I went on to find where it is actually located on the web server
 
