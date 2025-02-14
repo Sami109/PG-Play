@@ -353,3 +353,45 @@ by Ben "epi" Risher 🤓                 ver: 2.11.0
 
 Trying to brute force .zip extension files
 
+```
+┌──(kali㉿kali)-[~/Desktop]
+└─$ gobuster dir -u http://192.168.189.219/textpattern/textpattern -w /usr/share/wordlists/dirb/common.txt -x zip
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://192.168.189.219/textpattern/textpattern
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/dirb/common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Extensions:              zip
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/.hta                 (Status: 403) [Size: 311]
+/.hta.zip             (Status: 403) [Size: 315]
+/.htaccess.zip        (Status: 403) [Size: 320]
+/.htaccess            (Status: 403) [Size: 316]
+/.htpasswd            (Status: 403) [Size: 316]
+/.htpasswd.zip        (Status: 403) [Size: 320]
+/include              (Status: 301) [Size: 344] [--> http://192.168.189.219/textpattern/textpattern/include/]
+/index.php            (Status: 200) [Size: 4553]
+/lang                 (Status: 301) [Size: 341] [--> http://192.168.189.219/textpattern/textpattern/lang/]
+/lib                  (Status: 301) [Size: 340] [--> http://192.168.189.219/textpattern/textpattern/lib/]
+/plugins              (Status: 301) [Size: 344] [--> http://192.168.189.219/textpattern/textpattern/plugins/]
+/publish              (Status: 301) [Size: 344] [--> http://192.168.189.219/textpattern/textpattern/publish/]
+/setup                (Status: 301) [Size: 342] [--> http://192.168.189.219/textpattern/textpattern/setup/]
+/textpattern          (Status: 200) [Size: 82294]
+/tmp                  (Status: 301) [Size: 340] [--> http://192.168.189.219/textpattern/textpattern/tmp/]
+/update               (Status: 301) [Size: 343] [--> http://192.168.189.219/textpattern/textpattern/update/]
+/vendors              (Status: 301) [Size: 344] [--> http://192.168.189.219/textpattern/textpattern/vendors/]
+Progress: 9228 / 9230 (99.98%)
+===============================================================
+Finished
+===============================================================
+
+```
+
