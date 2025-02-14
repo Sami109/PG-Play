@@ -805,6 +805,7 @@ Still not able to find anything interesting, decided to go ahead and use another
 
 And truth be told, I managed to find the .zip compressed file using gobuster instead
 
+```
 ┌──(kali㉿kali)-[~/Desktop]
 └─$ gobuster dir -u http://192.168.189.219 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x zip
 ===============================================================
@@ -833,3 +834,43 @@ Progress: 83434 / 441122 (18.91%)
 ===============================================================
 Finished
 ===============================================================
+
+```
+
+![](attachments/Pasted%20image%2020250214212903.png)
+
+For cracking a compressed file protected with a password, I chose to go with John the Ripper tool to crack the password using the rockyou dictionary
+
+```
+┌──(kali㉿kali)-[~/Downloads]
+└─$ zip2john spammer.zip > spammer    
+ver 2.0 spammer.zip/creds.txt PKZIP Encr: cmplen=27, decmplen=15, crc=B003611D ts=ADCB cs=b003 type=0
+                                                                                                                              
+┌──(kali㉿kali)-[~/Downloads]
+└─$ cat spammer    
+spammer.zip/creds.txt:$pkzip$1*1*2*0*1b*f*b003611d*0*27*0*1b*b003*2d41804a5ea9a60b1769d045bfb94c71382b2e5febf63bda08a56c*$/pkzip$:creds.txt:spammer.zip::spammer.zip
+                                                                                                                              
+┌──(kali㉿kali)-[~/Downloads]
+└─$ john spammer -w=../Desktop/rockyou.txt
+Using default input encoding: UTF-8
+Loaded 1 password hash (PKZIP [32/64])
+Will run 4 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+myspace4         (spammer.zip/creds.txt)     
+1g 0:00:00:00 DONE (2025-02-15 03:13) 100.0g/s 2457Kp/s 2457Kc/s 2457KC/s christal..280789
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+
+```
+
+I was able to obtain some kind of credentials 
+
+![](attachments/Pasted%20image%2020250214213210.png)
+
+Proceeding forward, I have decided to try loging to the textpattern CMS again
+
+I was then able to login successfully using the obtain credentials previously 
+
+![](attachments/Pasted%20image%2020250214213322.png)
+
+Having this 
