@@ -351,3 +351,5 @@ by Ben "epi" Risher 🤓                 ver: 2.11.0
 [####################] - 2s     30000/30000   14866/s http://192.168.189.219/textpattern/textpattern/vendors/ => Directory listing (add --scan-dir-listings to scan)    
 ```
 
+Trying to brute force .zip extension files
+
